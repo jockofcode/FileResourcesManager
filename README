@@ -1,0 +1,31 @@
+# FileResourcesManager helps manage global application file_resources stored in 
+# a file by giving the application a central location and
+# consistent interface no matter where the data is stored
+
+# FileResourcesManager needs a central place to store it's file, the default
+# is in the ~/.app_file_resources directory, but it will use the
+# APP_SETTINGS environment variable for the directory instead
+# if the directory does not exist it will be created on the 
+# first get or set or if you call FileResourcesManager.ensure_main_file_resources_file_exists
+
+# Usage:
+#      FileResourcesManager.set("business_database",{:adapter => "mysql",:host => "database",...})
+#       saves the business database file_resources to the business_database.yml file
+#        in the ~/.app_file_resources directory
+#      FileResourcesManager.get("business_database")[:adapter]       => "mysql
+#       retrieves all the file_resources from the file
+#
+#      FileResourcesManager.set_file_resources_location("business_database","/var/myapp/values.yml")
+#       sets the location for future file_resources to the file "values.yml" at /var/myapp
+#
+#
+#       Full Example:
+#       require 'rubygems' #if not in path and ruby version before 1.9.*
+#       require 'file_resources_manager'
+#       FileResourcesManager.set_file_resources_location("my_login","~/.login_info")
+#       FileResourcesManager.set("my_login",{ :username => "JockOfCode",:password => "1235711"})
+#       ...
+#       #later in program, or in another program...
+#       info = FileResourcesManager.get("my_login")
+#       SomeWebbyThingie.login(info[:username],info[:password])
+
